@@ -16,12 +16,11 @@
             url: "https://json-now-ohjoczewvz.now.sh/todos"
         })
         .done((data) => {
-            console.log('[Todo]<getTodos> data: ', data)
             callback(data)
-            return callback(data)
+            return 1
         }).fail((err) => {
             alert('Todo一覧取得に失敗しました')
-            return err
+            return 0
         });
     }
 
