@@ -5,6 +5,7 @@
         }
     }
 
+    // todoの追加処理
     TodoView.prototype.appendTodo = function (todo) {
         var isDone = todo.isDone === "false"? false:true
         if (isDone) {
@@ -20,7 +21,8 @@
             }
         })
     }
-
+    
+    // todoのfilter処理
     TodoView.prototype.filterTodo = function(id, isChecked){
         var todoDom = $("#" + id).parent()
         if (isChecked) {
@@ -32,10 +34,28 @@
         }
     }
 
+    // todoの更新処理
+    TodoView.prototype.updateTodo = function(){
+        $('#remain').text($('#todos-area input:checkbox').length - $('#todos-area input:checkbox:checked').length)
+    }
+
+    // fiterのtoggle処理
+    TodoView.prototype.toggleFilter = function(){
+        var filterState = $('#filter-state').text()
+        if (filterState === 'off') {
+            $('#filter-state').text('on')
+            $('#todos-area input:checkbox:checked').parent().addClass('hide')
+        } else {
+            // on -> off もしくは, init時はこっちの分岐に入る. 
+            $('#filter-state').text('off')
+            $('#todos-area input:checkbox:checked').parent().removeClass('hide')
+        }
+    }
+
     global.todo.view = new TodoView()
 
     function _extractData(data) {
         global.todo.model.todos = data
     }
 
-}(window || global)); // ここのglobalはthidでもいいかも. windowがないとき(nodejs)でも動かせる
+}(window || global));

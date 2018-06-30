@@ -55,4 +55,4 @@
 
     global.todo.model = new Todo()
 
-}(window || global)); // ここのglobalはthidでもいいかも. windowがないとき(nodejs)でも動かせる
+}(window || global));
