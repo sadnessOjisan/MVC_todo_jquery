@@ -8,7 +8,7 @@
     TodoView.prototype.appendTodo = function (todo) {
         var isDone = todo.isDone === "false"? false:true
         if (isDone) {
-            $('#todos-area').append('<p class="unchecked"><input checked type="checkbox" class="todo-check" id=' + todo.id + ' /><span>' + todo.task + '</span></p>')
+            $('#todos-area').append('<p class="checked"><input checked type="checkbox" class="todo-check" id=' + todo.id + ' /><span>' + todo.task + '</span></p>')
         } else {
             $('#todos-area').append('<p class="unchecked"><input type="checkbox" class="todo-check" id=' + todo.id + ' /><span>' + todo.task + '</span></p>')
         }
@@ -19,7 +19,6 @@
                 global.todo.controller.updateTodo(e, todo)
             }
         })
-        global.todo.view.filterTodo(todo.id, isDone)
     }
 
     TodoView.prototype.filterTodo = function(id, isChecked){
