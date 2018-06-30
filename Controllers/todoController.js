@@ -5,6 +5,12 @@
         }
     }
 
+    // アプリ起動時のinit処理. todoを取得し、フィルター処理を初期化する処理
+    TodoController.prototype.init = function () {
+        global.todo.model.getTodos(_addDataToView)
+        global.todo.view.toggleFilter()
+    }
+
     // formが送信されたらそれをtodoに付け加える処理
     $('#submit-form').submit(function (event) {
         event.preventDefault();
@@ -16,12 +22,6 @@
     $('#filter-btn').on('click', function () {
         global.todo.view.toggleFilter()
     })
-
-    // アプリ起動時のinit処理. todoを取得し、フィルター処理を初期化する処理
-    TodoController.prototype.init = function () {
-        global.todo.model.getTodos(_addDataToView)
-        global.todo.view.toggleFilter()
-    }
 
     // todoを作成する処理. サーバーにtodoを送る
     TodoController.prototype.createTodo = function (todo) {

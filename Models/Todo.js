@@ -5,16 +5,17 @@
         }
 
         this.todos = todos || {}
+        this.HOST_URL = 'https://json-now-ohjoczewvz.now.sh/'
     }
 
     // todo一覧を取得
     Todo.prototype.getTodos = function (callback) {
         $.ajax({
                 type: "GET",
-                url: "https://json-now-ohjoczewvz.now.sh/todos"
+                url: this.HOST_URL+"todos"
             })
             .done((data) => {
-                global.todo.model.todos = data
+                this.todos = data
                 callback(data)
             }).fail((err) => {
                 alert('Todo一覧取得に失敗しました')
@@ -25,7 +26,7 @@
     Todo.prototype.createTodo = function (task, callback) {
         $.ajax({
                 type: "POST",
-                url: "https://json-now-ohjoczewvz.now.sh/todos",
+                url: this.HOST_URL + "todos",
                 data: {
                     'task': task,
                     isDone: false
@@ -39,10 +40,11 @@
             })
     }
 
+    // todoの更新
     Todo.prototype.updateTodo = function (id, task, isChecked) {
         $.ajax({
                 type: "PUT",
-                url: "https://json-now-ohjoczewvz.now.sh/todos/" + id,
+                url: this.HOST_URL + "todos/" + id,
                 data: {
                     task: task,
                     isDone: isChecked ? true : false

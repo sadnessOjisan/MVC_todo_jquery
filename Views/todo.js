@@ -54,8 +54,4 @@
 
     global.todo.view = new TodoView()
 
-    function _extractData(data) {
-        global.todo.model.todos = data
-    }
-
 }(window || global));
