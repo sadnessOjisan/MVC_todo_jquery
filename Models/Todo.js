@@ -39,13 +39,13 @@
             })
     }
 
-    Todo.prototype.updateTodo = function (todo) {
+    Todo.prototype.updateTodo = function (id, task, isChecked) {
         $.ajax({
                 type: "PUT",
-                url: "https://json-now-ohjoczewvz.now.sh/todos/" + todo.id,
+                url: "https://json-now-ohjoczewvz.now.sh/todos/" + id,
                 data: {
-                    task: todo.task,
-                    isDone: todo.isDone === "false" ? true : false
+                    task: task,
+                    isDone: isChecked ? true : false
                 }
             })
             .done((data) => {}).fail(function () {
