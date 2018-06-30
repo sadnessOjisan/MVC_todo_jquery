@@ -7,15 +7,24 @@
 
     $('#submit-form').submit(function (event) {
         event.preventDefault();
-        console.log('fire')
         var todo = $('#submit-form [name=todo]').val();
-        console.log('<_addDataToView>todo: ', todo)
         global.todo.controller.createTodo(todo)
     });
 
+    $('#filter-btn').on('click', function(){
+        var filterState = $('#filter-state').text()
+        if(filterState === '' || filterState === 'on'){
+            $('#filter-state').text('off')
+            $('#todos-area input:checkbox:checked').parent().addClass('hide')
+        }else{
+            $('#filter-state').text('on')
+            $('#todos-area input:checkbox:checked').parent().removeClass('hide')
+        }
+    })
+
     TodoController.prototype.init = function() {
-        console.log('init')
         global.todo.model.getTodos(_addDataToView)
+        $('#filter-state').text('off')
     }
 
     TodoController.prototype.createTodo = function(todo) {
@@ -25,14 +34,12 @@
     global.todo.controller = new TodoController()
 
     function _addDataToView(data){
-        console.log('<_addDataToView>data: ', data)
         if(data instanceof Array){
             for(var i=0; i<data.length; i++){
                 var todo = data[i]
                 global.todo.view.appendTodo(todo)
             }
         }else{
-            console.log('data: ', data)
             global.todo.view.appendTodo(data)
         }
     }
