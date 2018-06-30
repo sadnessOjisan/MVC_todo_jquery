@@ -19,13 +19,17 @@
                 global.todo.controller.updateTodo(e, todo)
             }
         })
-        var todoDom = $("#" + todo.id).parent()
-        if (isDone) {
-            todoDom.removeClass("unchecked")
+        global.todo.view.filterTodo(todo.id, isDone)
+    }
+
+    TodoView.prototype.filterTodo = function(id, isChecked){
+        var todoDom = $("#" + id).parent()
+        if (isChecked) {
             todoDom.addClass("checked")
+            todoDom.removeClass("unchecked")
         } else {
-            todoDom.removeClass("checked")
             todoDom.addClass("unchecked")
+            todoDom.removeClass("checked")
         }
     }
 

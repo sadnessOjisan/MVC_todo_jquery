@@ -41,14 +41,7 @@
         var id = e.target.id
         var isChecked = $(e.target).is(':checked')
         var task = shouldUpdateTodo.task
-        var todoDom = $("#" + id).parent()
-        if (isChecked) {
-            todoDom.addClass("checked")
-            todoDom.removeClass("unchecked")
-        } else {
-            todoDom.addClass("unchecked")
-            todoDom.removeClass("checked")
-        }
+        global.todo.view.filterTodo(id, isChecked)
         global.todo.model.updateTodo(id, task, isChecked)
     }
 
