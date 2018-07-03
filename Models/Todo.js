@@ -33,7 +33,7 @@
                 }
             })
             .done((data) => {
-                global.todo.model.todos = data
+                global.todo.model.todos.append(data)
                 callback(data)
             }).fail((err) => {
                 alert('Todo作成に失敗しました')
@@ -50,7 +50,10 @@
                     isDone: isChecked ? true : false
                 }
             })
-            .done((data) => {}).fail(function () {
+            .done((data) => {
+                var updatedTodo = data
+                global.todo.model.todos.filter(todo => todo.id !== updatedTodoId).append(updatedTodo)
+            }).fail(function () {
                 alert('更新に失敗しました')
             })
     }
