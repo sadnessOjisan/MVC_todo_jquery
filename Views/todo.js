@@ -34,13 +34,26 @@
             }
             $('#remain').text($('#todos-area input:checkbox').length - $('#todos-area input:checkbox:checked').length)
             $('.todo-check').on('click', function (e) {
-                var clickedPoint = e.target
-                if (clickedPoint.id == todo.id) {
-                    global.todo.controller.updateTodo(e, todo)
-                }
+                var clickedPointId = e.target.id
+                var clickedTodo = global.todo.model.todos.find(function(element) {
+                    return element.id == clickedPointId;
+                  })
+                global.todo.controller.updateTodo(e, clickedTodo)
             })
         }
     }
+
+    // formが送信されたらそれをtodoに付け加える処理
+    $('#submit-form').submit(function (event) {
+        event.preventDefault();
+        var todo = $('#submit-form [name=todo]').val();
+        global.todo.controller.createTodo(todo)
+    });
+
+    // todoを表示を切り替えのフィルターのトグル処理
+    $('#filter-btn').on('click', function () {
+        global.todo.view.toggleFilter()
+    })
 
 
     // todoのfilter処理

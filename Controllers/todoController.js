@@ -11,17 +11,7 @@
         global.todo.view.toggleFilter()
     }
 
-    // formが送信されたらそれをtodoに付け加える処理
-    $('#submit-form').submit(function (event) {
-        event.preventDefault();
-        var todo = $('#submit-form [name=todo]').val();
-        global.todo.controller.createTodo(todo)
-    });
-
-    // todoを表示を切り替えのフィルターのトグル処理
-    $('#filter-btn').on('click', function () {
-        global.todo.view.toggleFilter()
-    })
+    
 
     // todoを作成する処理. サーバーにtodoを送る
     TodoController.prototype.createTodo = function (todo) {

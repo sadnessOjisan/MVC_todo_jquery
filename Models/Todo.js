@@ -52,7 +52,7 @@
             })
             .done((data) => {
                 var updatedTodo = data
-                global.todo.model.todos.filter(todo => todo.id !== updatedTodoId).append(updatedTodo)
+                global.todo.model.todos.filter(todo => todo.id !== updatedTodo.id).push(updatedTodo)
             }).fail(function () {
                 alert('更新に失敗しました')
             })
