@@ -4,7 +4,7 @@
             return new Todo();
         }
 
-        this.todos = todos || {}
+        this.todos = todos || []
         this.HOST_URL = 'https://json-now-ohjoczewvz.now.sh/'
     }
 
@@ -33,8 +33,8 @@
                 }
             })
             .done((data) => {
-                global.todo.model.todos.append(data)
-                callback(data)
+                this.todos.push(data)
+                callback()
             }).fail((err) => {
                 alert('Todo作成に失敗しました')
             })

@@ -7,7 +7,7 @@
 
     // アプリ起動時のinit処理. todoを取得し、フィルター処理を初期化する処理
     TodoController.prototype.init = function () {
-        global.todo.model.getTodos(_addDataToView)
+        global.todo.model.getTodos(_renderTodos)
         global.todo.view.toggleFilter()
     }
 
@@ -25,7 +25,7 @@
 
     // todoを作成する処理. サーバーにtodoを送る
     TodoController.prototype.createTodo = function (todo) {
-        global.todo.model.createTodo(todo, _addDataToView)
+        global.todo.model.createTodo(todo, _renderTodos)
     }
 
     // todoの進捗を更新する処理
@@ -50,6 +50,11 @@
         } else {
             global.todo.view.appendTodo(data)
         }
+    }
+
+    function _renderTodos(){
+        var todos = global.todo.model.todos
+        global.todo.view.renderTodos(todos)
     }
 
 }(window || global));
