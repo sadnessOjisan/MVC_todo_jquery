@@ -11,8 +11,6 @@
         global.todo.view.toggleFilter()
     }
 
-    
-
     // todoを作成する処理. サーバーにtodoを送る
     TodoController.prototype.createTodo = function (todo) {
         global.todo.model.createTodo(todo, _renderTodos)
@@ -23,24 +21,11 @@
         var id = e.target.id
         var isChecked = $(e.target).is(':checked')
         var task = shouldUpdateTodo.task
-        global.todo.view.updateTodo()
-        global.todo.view.filterTodo(id, isChecked)
+        global.todo.view.updateTodo(id, isChecked)
         global.todo.model.updateTodo(id, task, isChecked)
     }
 
     global.todo.controller = new TodoController()
-
-    // callback
-    function _addDataToView(data) {
-        if (data instanceof Array) {
-            for (var i = 0; i < data.length; i++) {
-                var todo = data[i]
-                global.todo.view.appendTodo(todo)
-            }
-        } else {
-            global.todo.view.appendTodo(data)
-        }
-    }
 
     function _renderTodos(){
         var todos = global.todo.model.todos
